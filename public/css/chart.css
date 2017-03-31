@@ -10,13 +10,13 @@ body{
   font-family:"raleway", "sans-serif";
   margin:auto;
   margin-top:0;
-  width:60%;
+  max-width:1000px;
   height:100%;
   padding-top:30px;
 }
 
 .container{
-  width:70%;
+  max-width:600px;
   margin: auto;
   background: rgba(98,160,174,0.9);
   text-align: center;
