@@ -1,0 +1,114 @@
+
+html{
+  background:black;
+  height:100%;
+  padding:0;
+}
+
+body{
+  background: url("../imgs/background.jpg");
+  font-family:"raleway", "sans-serif";
+  margin:auto;
+  margin-top:0;
+  width:60%;
+  height:100%;
+  padding-top:30px;
+}
+
+.container{
+  width:70%;
+  margin: auto;
+  background: rgba(98,160,174,0.9);
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 5px;
+  padding:5px;
+  padding-bottom:25px;
+}
+
+.pollTitle{
+    padding:5px;
+    background: purple;
+    border: solid 1px white;
+    border-radius:2px;
+    margin:auto;
+    margin-top:20px;
+    max-width:300px;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    
+}
+
+
+.pollOptions{
+    margin-top:5px;
+    margin-bottom:20px;
+}
+
+.opt-container{
+  max-width:300px;
+  margin:auto;
+}
+
+.opt{
+    
+    background: white;
+    border: solid 1px black;
+    border-radius:2px;
+    cursor:pointer;
+    width:80%;
+    font-size: 20px;
+    text-align: center;
+    padding:6px;
+    display:inline-block;
+    
+}
+
+
+/*******CHART******/
+
+.tick{
+  font-size:13px;
+  font-family: "raleway";
+}
+
+/********FORM*********/
+
+.noDisplay{
+  display:none;
+}
+
+#addOpt{
+  margin-bottom:20px;
+}
+
+.showForm{
+  margin-bottom:20px;
+  padding:5px;
+  font-family: 'raleway';
+  cursor:pointer;
+  background-color:#2E64FE;
+  color:black;
+  border:solid 1px white;
+}
+
+#newOptText{
+  padding:3px;
+  border-radius:2px;
+  border: solid 1px white;
+}
+
+#submitButton, .b{
+  margin-left:7px;
+  padding:3px;
+  border-radius:2px;
+  border:solid 1px white;
+  background:white;
+  cursor:pointer;
+}
+
+.b{
+  width:20px;
+  font-weight:bold;
+}

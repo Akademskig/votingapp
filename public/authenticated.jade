@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Voting App - homepage</title>
+  
+<meta charset="UTF-8">
+<link href="/public/css/main.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+<div class="navbar">
+<a href="/logout"><button class="logout b" >Logout</button></a>
+<a href="/"><button class="myPolls b" >Homepage</button></a></div>
+<h1 class="title">Welcome, <span id="username"></span></h1> 
+<div class="polls">
+<div class="existingPolls"></div>
+<button class="newPoll">New Poll</button> 
+  
+<form action="/postNewPoll" method="post"id="newPollForm" class="noDisplay">
+<input name = "user" style="display:none"value="user" id="user"></input>
+<label for="pollName">Poll Name:</label><br><input type="text"name="pollName"/><br>
+<label for="polOptions">Poll Options:</label>
+<div class="newoptions">
+<div class="newoption">
+<input type="text"name="pollOption"/><button type="button" class="removeOption">x</button><br>
+</div>
+</div>
+<button class="newOption b" type="button">New Option</button>
+<input class="submitButt b"type="submit" value="Save"/>        
+</form>
+</div> 
+</div>
+script.
+  var activeUser=0;
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="controllers/getUser.js"></script>
+<script type="text/javascript" src="controllers/getPolls.js"></script>
+<script type="text/javascript" src="controllers/newPolls.js"></script>
+  
+</body>  
+</html>
+
+
+

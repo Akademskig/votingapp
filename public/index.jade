@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Homepage</title>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"> 
+<link href="/public/css/main.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+<h1 class="title">Welcome to the VotingApp!</h1>
+<div class="buttons">
+<a href="/locallogin"><button class="login b" >Login</button></a>
+<a href="/gitLogin"><button class="gitLogin b"><i class="fa fa-github" aria-hidden="true"></i>Login with GitHub</button></a>
+</div>
+<div class="homepg"><p>Current polls</p><div class="existingPolls"></div></div>  
+</div>
+
+script.
+    var activeUser='!{user}'
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="controllers/homepgRender.js"></script>
+<script type="text/javascript" src="controllers/getPolls.js"></script>
+</body>  
+</html>
