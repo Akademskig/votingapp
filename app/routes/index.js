@@ -190,4 +190,10 @@ module.exports = function (app, passport) {
 				res.render('poll',{pollId: docs, currentUser:user})
 			})
 		})
+		
+	app.route('/favicon.ico')
+		.get(function(req,res){
+			console.log(path)
+			res.send(path+'/public/imgs/icon.html')
+		})
 }	
