@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function(){
      var xScale = d3.scaleBand()
         .domain(arrayOfOptions)
         .range([0,chartWidth])
-        .padding([0.2])
+        //.padding([0.2])
         
         
         var xAxis= d3.axisBottom(xScale).ticks(arrayOfOptions.length)

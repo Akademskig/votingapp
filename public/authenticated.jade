@@ -12,14 +12,15 @@
 </head>
 <body>
 <div class="container">
-<div class="navbar">
+<div class="buttons">
 <a href="/logout"><button class="logout b" >Logout</button></a>
 <a href="/"><button class="myPolls b" >Homepage</button></a></div>
 <h1 class="title">Welcome, <span id="username"></span></h1> 
+
 <div class="polls">
 <div class="existingPolls"></div>
 <button class="newPoll">New Poll</button> 
-  
+</div>  
 <form action="/postNewPoll" method="post"id="newPollForm" class="noDisplay">
 <input name = "user" style="display:none"value="user" id="user"></input>
 <label for="pollName">Poll Name:</label><br><input type="text"name="pollName"/><br>
@@ -33,7 +34,7 @@
 <input class="submitButt b"type="submit" value="Save"/>        
 </form>
 </div> 
-</div>
+
 script.
   var activeUser=0;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

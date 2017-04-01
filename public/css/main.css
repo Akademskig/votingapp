@@ -13,11 +13,11 @@ body{
   max-width:1000px;
   padding-top:30px;
   padding-bottom:80px;
+   text-align: center;
 }
 
 h1{
-  border-bottom:solid 1px white;
-  padding:20px;
+  padding:15px;
   margin:0;
   font-size:30px;
 }
@@ -26,19 +26,24 @@ h1{
   margin: auto;
   background: rgba(65,104,134,0.7);
   text-align: center;
-  border: solid 1px white;
-  border-radius: 5px;
+  border: solid 1px black;
+  border-left:none; 
+  border-right:none;
   padding:5px;
+  
 }
 
 .buttons{
-  margin-top:5px;
-  margin-bottom:5px;
+  padding:3px;
+  margin:5px;
   text-align:right;
+  border: solid 1px white;
+  border-right:none;
+  border-left:none;
 }
 
 .b{
-  margin: 0 5px 0 0;
+  margin: 0 2px 0 0;
   padding: 5px 10px;
   color:white;
   border: solid 1px black;
@@ -170,7 +175,6 @@ EXISTING POLLS
 ****/
 
 .homepg{
-  border-top:solid 1px white;
   padding-top:20px;
   
 }
@@ -179,7 +183,7 @@ p{
   font-size:25px;
 }
 
-.homepg p{
+.homepg .currentPolls{
   font-weight:bold;
 }
 
@@ -192,15 +196,15 @@ p{
 
 .poll{
   width:270px;
-  border: solid 1px #A9BCF5;
-  border-radius: 5px;
+  border: solid 1px black;
+  border-radius: 3px;
   cursor: pointer;
   display:inline-block;
   margin-bottom:10px;
   
 }
 .pollName{
-  //background: #0B173B;
+  background:#084B8A;
   color: black;
   font-weight:bold;
   font-size:21px;
@@ -208,7 +212,7 @@ p{
   overflow:auto;
   white-space:nowrap;
   text-overflow: ellipsis;
-  border-radius:5px;
+  border-radius:3px;
 }
 
 .user{
