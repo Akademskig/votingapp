@@ -168,8 +168,16 @@ document.addEventListener("DOMContentLoaded", function(){
       }
     }
   });
+  var totalHeight;
+  if(xAxisWidth == undefined){
+      totalHeight= svgHeight;
+  }
+  else{
+      totalHeight=svgHeight +xAxisWidth
+  }
+  console.log(typeof xAxisWidth)
   chart.attr('width',svgWidth)
-        .attr('height',svgHeight+xAxisWidth)
+        .attr('height',totalHeight)
 }
 
 })
