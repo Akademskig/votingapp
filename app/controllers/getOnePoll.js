@@ -164,8 +164,9 @@ document.addEventListener("DOMContentLoaded", function(){
         line = [word];
         tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
         var fontSize=$(".axis").attr('font-size')
-        xAxisWidth=lineNumber*lineHeight*fontSize;
+        xAxisWidth=lineNumber*(lineHeight+0.25)*fontSize;
       }
+     
     }
   });
   var totalHeight;
@@ -175,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function(){
   else{
       totalHeight=svgHeight +xAxisWidth
   }
-  console.log(typeof xAxisWidth)
+  console.log(xAxisWidth)
   chart.attr('width',svgWidth)
         .attr('height',totalHeight)
 }
