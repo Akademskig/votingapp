@@ -5,4 +5,3 @@ module.exports = {
 		'callbackURL': process.env.APP_URL + 'auth/github/callback'
 	}
 };
-//local auth..

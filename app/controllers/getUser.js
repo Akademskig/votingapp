@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function() {
    //------GET USER--------------
    $.get(appUrl+'/getUser', function(data){
        $(user).html(data.username+'!')
-       console.log(data);
        $(userForm).val(data.username);
       
        if(data.username!=undefined){

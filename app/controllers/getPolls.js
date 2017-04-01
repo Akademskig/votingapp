@@ -3,9 +3,7 @@
 document.addEventListener("DOMContentLoaded", function() {
   
   var existingPolls= document.querySelector(".existingPolls");
-  var pollButton= document.createElement("button");
   var appUrl=window.location.origin;
-  console.log(activeUser)
   if(activeUser != 0){
     getData('/getAllPolls')
   }
@@ -21,8 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var ident;
         var pollName;
         var name;
-        
-        console.log(data)
+        var k= 0;
         data.forEach(function(val, j){
           ident= String.fromCharCode(j+97);
           idd=val.id;
@@ -32,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function() {
          
           val.polloptions.forEach(function(opt){
             pollOptions.push(opt);
-            console.log("opt:" +opt)
           });
           var whosPoll= val.user;
           var anchor=document.createElement("a");
@@ -51,56 +47,15 @@ document.addEventListener("DOMContentLoaded", function() {
             $(name).html(pollName)
           }
           
-          var checkifVoted= false;
-          var optionsDiv = document.createElement("div");
-          $(optionsDiv).addClass("existingOption noDisplay");
           
-           //-------------OPTION NODES -----------------------
-          pollOptions.forEach(function(val,i){
-            
-            var ident2=String.fromCharCode(i+97)
-            var optionNum= ident+ident2;
-            
-            var opt = document.createElement("div");
-            var optName=document.createElement("span");
-            
-            opt.className="opti";
-            $(opt).attr("id",optionNum);
-            var textOpt=document.createTextNode(val.optname);
-            optName.appendChild(textOpt);
-            opt.appendChild(optName);
-            //--------votes----------------
-            
-            var votes=document.createElement("span");
-            votes.className="votes";
-            var voteText=document.createTextNode(val.votecount);
-            votes.appendChild(voteText);
-            opt.appendChild(votes);
-            optionsDiv.appendChild(opt);
-            //---------------------
-            
-            //---------EVENT LISTENER----------------------
-            var id=optionsDiv.querySelector("#"+optionNum);
-            
-            var vote={"pollName": pollName, "polloption": val}
-            
-            var count=vote.polloption.votecount;
-            id.addEventListener("click",function(){
-              if (!checkifVoted){
-                count++;
-                checkifVoted= true;
-                $(votes).html(count);
-                $.post(appUrl+'/vote',vote, function(){               
-                })
-              }
-              else{
-                alert("You already voted!");
-              }
-              event.preventDefault();
-            })
-            //------------------------------------
-          })
-          //---------END OPTION NODES------------
+          var pollColors={0: '#FF4000',1:'#013ADF', 2: '#0B610B', 3:'#6A0888' , 4: '#8A0808' , 5: '#0B173B' , 6: '#DF7401' };
+          
+          if(k >6){
+            k=0
+          }
+          name.style.background= pollColors[k]
+          k++
+          
           
           //---------REMOVE BUTTONS----------------
           
@@ -111,11 +66,13 @@ document.addEventListener("DOMContentLoaded", function() {
           
           
           poll.appendChild(name);
-          poll.appendChild(optionsDiv);
           anchor.appendChild(poll);
           existingPolls.appendChild(anchor);
           existingPolls.appendChild(removePollButton);
           
+          if(activeUser!='Akademskig' && activeUser !=0){
+            $(".removeButton").addClass("noDisplay")
+          }
           
           //--------REMOVE BUTTONS FUNCTION------------
           

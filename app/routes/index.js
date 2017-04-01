@@ -59,14 +59,12 @@ module.exports = function (app, passport) {
 		
 	app.route('/postNewPoll')
 		.post(function(req,res){
-			console.log("poll name"+req.body.pollName+", "+ "pollOptions: "+ req.body.pollOption + "user:" + req.body.user)
 			var newPoll= new Polls();
 			newPoll.pollname=req.body.pollName;
 			newPoll.user=req.body.user;
 			newPoll.id=new Date().getTime();
 			var optArray=[];
 			optArray.push(req.body.pollOption);
-			console.log("rbp:"+req.body.pollOption)
 			
 			if(typeof(req.body.pollOption)=="string"){
 				var obj={optname:req.body.pollOption, votecount:0}
@@ -84,13 +82,9 @@ module.exports = function (app, passport) {
 				}
 			});
 			res.redirect('/myPolls');
-			console.log("saved");
 		})
 	app.route('/getUser')
 		.get(isLoggedIn, function (req, res) {
-			console.log("req.user.local:"+req.user.local)
-			console.log(req.user.local=="{}")
-			console.log(req.user.github==true)
 			var user = (req.user.github!="{}" ? req.user.github:req.user.local);
 			res.json(user);
 		});
@@ -119,13 +113,11 @@ module.exports = function (app, passport) {
 		
 	app.route('/myPolls')
 		.get(isLoggedIn,function(req,res){
-			res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 			res.render('authenticated')
 		})
 		
 	app.route('/addOption')
 		.post(function(req,res){
-			console.log(req.body)
 			Polls.findOneAndUpdate({"id":req.body.pollID},{$push: {'polloptions':{'optname':req.body.addedOpt,'votecount':0}}},function(err, data){
 				if(err){
 					throw err;
@@ -144,7 +136,6 @@ module.exports = function (app, passport) {
 				ifVoted.pollname=req.body.pollName
 				ifVoted.voted=1;
 				ifVoted.who=user
-				res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 				res.redirect('/'+req.body.id)
 			 })
 		})
@@ -154,13 +145,12 @@ module.exports = function (app, passport) {
 		
 	app.post('/removePoll', function(req,res){
 		Polls.remove({'pollname': req.body.pollname},function(data){
-			console.log(data)
+			res.redirect('/myPolls');
 		})
-		res.redirect('/myPolls');
+		
 	})
 	
 	app.post('/removeOption', function(req,res){
-		console.log(req.body)
 		Polls.findOneAndUpdate({'id':req.body.pollid},{$pull:{'polloptions':{'optname': req.body.option}}},function(err,docs){
 			if(err){
 				throw err;
@@ -177,7 +167,6 @@ module.exports = function (app, passport) {
 		
 	app.route('/:idd')
 		.get(ifUserDefined,function(req,res){
-			//console.log(req.user)
 			var user=null;
 			if(req.user!=undefined){
 			user=req.user.local.username || req.user.github.username;
@@ -186,14 +175,12 @@ module.exports = function (app, passport) {
 				user="nl"
 			}
 			Polls.findOne({id: req.params.idd},{'_id':0},function(err,docs){
-				//console.log(docs)
 				res.render('poll',{pollId: docs, currentUser:user})
 			})
 		})
 		
 	app.route('/favicon.ico')
 		.get(function(req,res){
-			console.log(path)
 			res.send(path+'/public/imgs/icon.html')
 		})
 }	

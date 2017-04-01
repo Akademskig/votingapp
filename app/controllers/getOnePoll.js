@@ -5,9 +5,8 @@ document.addEventListener("DOMContentLoaded", function(){
     var options=pollData.polloptions
     $("title").html(pollData.pollname)
     $(".pollTitle").html(pollData.pollname)
-   console.log(pollData)
+   
     var sumVotes=0;
-    var checkifVoted=false;
     var arrayOfVotes=[];
     var arrayOfOptions=[]
     options.forEach(function(val){
@@ -30,8 +29,6 @@ document.addEventListener("DOMContentLoaded", function(){
         })
         //--------VOTING LISTENER---------------
         var vote={"pollName": pollData.pollname, "polloption": val.optname, "id": pollData.id}
-        console.log(vote)
-        var count=val.votecount;
         $("."+optclass).on("click",function(){
             if(currentUser=="nl"){
                 alert("You need to log in to vote!")
@@ -39,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function(){
             }
             $.get(appUrl+'/vote', function(data){
                 if (data.who!=currentUser || data.pollname!=pollData.pollname){
-                    console.log(currentUser)
                     $.post(appUrl+'/vote',vote, function(){ 
                     location.reload(true)
                     })
@@ -53,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function(){
         //--------------------------------
     })
     //----------ADD OPTION FORM---------------
-    if(pollData.user== currentUser){
+    if(pollData.user== currentUser || currentUser=='Akademskig'){
         $(".buttDiv").removeClass('noDisplay')
         $(".b").removeClass('noDisplay')
     }
@@ -64,15 +60,12 @@ document.addEventListener("DOMContentLoaded", function(){
         }
         else
             $("#addOpt").addClass('noDisplay')
-        
     })
-    
-    
-    //---------------------
+   
     //--------CHART------------
     var margin={"top":20, "right": 20, "bottom": 40, "left": 40};
-    var chartHeight=200;
-    var chartWidth=250;
+    var chartHeight=300;
+    var chartWidth=350;
     var svgHeight=chartHeight+margin.top+margin.bottom
     var svgWidth=chartWidth+margin.left+margin.right
     var barWidth=chartWidth/arrayOfVotes.length
@@ -95,10 +88,10 @@ document.addEventListener("DOMContentLoaded", function(){
         
         var xAxis= d3.axisBottom(xScale).ticks(arrayOfOptions.length)
         var yAxis= d3.axisLeft(yScale).ticks(sumVotes) 
+        
+    
     
     var chart=d3.select('.chart')
-        .attr('width',svgWidth)
-        .attr('height',svgHeight)
         .style("background-color", "white")
         
     chart.selectAll("rect.bar")
@@ -139,12 +132,46 @@ document.addEventListener("DOMContentLoaded", function(){
      chart.append("g")
         .attr("class", "axis")
         .attr("transform", "translate("+margin.left+","+posXAx+")")
-        .call(xAxis); 
-    
+        .call(xAxis)
+        .selectAll('text')
+            .attr('dy',0.71)
+            .call(wrap, xScale.bandwidth())
+            
     chart.append("g")
         .attr("class", "axis")
         .attr("transform", "translate("+margin.left+","+margin.top+")")
         .call(yAxis)
+        
+    var xAxisWidth=0   
+    
+    function wrap(text, width) {
+  text.each(function() {
+    var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.1, // ems
+        y = text.attr("y"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+    while (word = words.pop()) {
+      line.push(word);
+      tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        tspan.text(line.join(" "));
+        line = [word];
+        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+        var fontSize=$(".axis").attr('font-size')
+        xAxisWidth=lineNumber*lineHeight*fontSize;
+      }
+    }
+  });
+  chart.attr('width',svgWidth)
+        .attr('height',svgHeight+xAxisWidth)
+}
+
 })
 
 

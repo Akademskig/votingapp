@@ -1,18 +1,18 @@
 
 html{
   background:black;
-  height:100%;
+  
   padding:0;
 }
 
 body{
-  background: url("../imgs/background.jpg");
+  background: url("../imgs/background.jpg") repeat;
   font-family:"raleway", "sans-serif";
   margin:auto;
   margin-top:0;
   max-width:1000px;
-  height:100%;
   padding-top:30px;
+  padding-bottom:80px;
 }
 
 h1{
@@ -22,11 +22,11 @@ h1{
   font-size:30px;
 }
 .container{
-  max-width:600px;
+  max-width:570px;
   margin: auto;
-  background: rgba(98,160,174,0.9);
+  background: rgba(65,104,134,0.7);
   text-align: center;
-  border: solid 1px black;
+  border: solid 1px white;
   border-radius: 5px;
   padding:5px;
 }
@@ -191,16 +191,16 @@ p{
 }
 
 .poll{
-  width:250px;
-  border: solid 1px black;
-  border-radius: 4px;
+  width:270px;
+  border: solid 1px #A9BCF5;
+  border-radius: 5px;
   cursor: pointer;
   display:inline-block;
   margin-bottom:10px;
   
 }
 .pollName{
-  background: purple;
+  //background: #0B173B;
   color: black;
   font-weight:bold;
   font-size:21px;
@@ -208,10 +208,14 @@ p{
   overflow:auto;
   white-space:nowrap;
   text-overflow: ellipsis;
+  border-radius:5px;
 }
 
 .user{
   font-size:15px;
+  padding:0;
+  margin-top:5px;
+  margin-bottom:0;
 }
 
 .opti{
@@ -234,7 +238,7 @@ Remove buttons
   border: solid 1px black;
   margin:6px;
   float:right;
-  margin-right:30px;
+  margin-right:10px;
   cursor:pointer;
   
 }
@@ -248,13 +252,3 @@ Remove buttons
   
 }
 
-/****************
-STYLING FOR HOMEPAGE POLLS
-*********************/
-.homepg .existingPolls .removeButton{
-  display:none;
-}
-
-.homepg .existingPolls .poll .existingOption{
-  display:none;
-}
