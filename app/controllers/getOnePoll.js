@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(){
     options.forEach(function(val){
         var opttoRemove={"pollid": pollData.id, "option": val.optname}
         var optclass=val.optname.split(" ").join("")
-        optclass=optclass.replace(/^[a-z]/i,"")
+        optclass=optclass.replace(/[^a-z0-9]/i,"")
         var w1=(val.votecount ==0)? 0:(val.votecount/sumVotes*100);
         $(".pollOptions").append("<div class=\"opt-container\"><div class=\"opt "+ optclass+"\">"+val.optname+": <span>"+w1.toFixed(2)+ "%</span></div><button class=\"b noDisplay remove-"+optclass+"\">x</button></div>")
         
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function(){
     }
     
     $(".showForm").on("click",function(){
-         $('.warning').addClass('noDisplay')
+         $('.warningEO').addClass('noDisplay')
         if($("#addOpt").hasClass("noDisplay")){
             $("#addOpt").removeClass('noDisplay')
         }

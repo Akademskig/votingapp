@@ -92,21 +92,23 @@ body{
   color:white;
   border:solid 1px black;
   border-radius:3px;
-  font-size:15px;
+  font-size:16px;
 }
 
 #newOptText{
-  padding:3px;
+  padding:4px;
   border-radius:2px;
+  font-size:16px;
 }
 
 #submitButton, .b{
   margin-left:7px;
-  padding:3px;
+  padding:5px;
   border-radius:2px;
   border:solid 1px white;
   background:white;
   cursor:pointer;
+  font-size: 15px;
 }
 
 .b{
@@ -128,7 +130,7 @@ body{
   border:solid 2px red;
 }
 
-.warning{
+.warning, .warningEO{
   color:red;
   font-size:15px;
   font-weight:bold;
