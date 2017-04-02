@@ -136,3 +136,7 @@ body{
   font-weight:bold;
   margin-top:5px;
 }
+.warningEO{
+  margin-top:25px;
+  z-index:10;
+}

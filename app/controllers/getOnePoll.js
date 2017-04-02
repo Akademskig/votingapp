@@ -23,23 +23,7 @@ document.addEventListener("DOMContentLoaded", function(){
         var w1=(val.votecount ==0)? 0:(val.votecount/sumVotes*100);
         $(".pollOptions").append("<div class=\"opt-container\"><div class=\"opt "+ optclass+"\">"+val.optname+": <span>"+w1.toFixed(2)+ "%</span></div><button class=\"b noDisplay remove-"+optclass+"\">x</button></div>")
         
-       //------------INVALID INPUT MESSAGE--------------------
-       $('#newOptText').on('input',function(){
-            var matchNonC=$('#newOptText').val().match(/[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/i)
-            if(matchNonC!=null){
-                $('#newOptText').removeClass('okInput')
-                $('#newOptText').addClass("invalidInput");
-                $('#submitButton').prop('disabled',true);
-                $('.warning').removeClass('noDisplay')
-
-            }
-            else{
-                $('#newOptText').addClass("okInput");
-                $('#newOptText').removeClass("invalidInput");
-                $('#submitButton').prop('disabled',false);
-                $('.warning').addClass('noDisplay')
-            }
-        })
+       
         
         $(".remove-"+optclass).on("click",function(val){
             $.post(appUrl+'/removeOption',opttoRemove,function(){
@@ -81,6 +65,36 @@ document.addEventListener("DOMContentLoaded", function(){
         else
             $("#addOpt").addClass('noDisplay')
     })
+    
+    //------------INVALID INPUT MESSAGE--------------------
+       $('#newOptText').on('input',function(){
+            var matchNonC=$('#newOptText').val().match(/[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/i)
+            if(matchNonC!=null){
+                $('#newOptText').removeClass('okInput')
+                $('#newOptText').addClass("invalidInput");
+                $('#submitButton').prop('disabled',true);
+                $('.warning').removeClass('noDisplay')
+
+            }
+            else{
+                $('#newOptText').addClass("okInput");
+                $('#newOptText').removeClass("invalidInput");
+                $('#submitButton').prop('disabled',false);
+                $('.warning').addClass('noDisplay')
+            }
+            var optExists=$('#newOptText').val();
+            
+            for(var i = 0; i < arrayOfOptions.length;i++){
+                if(arrayOfOptions[i]==optExists){
+                    $('.warningEO').removeClass('noDisplay')
+                    $('#submitButton').prop('disabled',true);
+                    break;
+                }
+                else
+                $('.warningEO').addClass('noDisplay')
+                $('#submitButton').prop('disabled',false);
+            }
+        })
    
     //--------CHART------------
     var margin={"top":20, "right": 20, "bottom": 40, "left": 40};

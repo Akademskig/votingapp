@@ -118,28 +118,13 @@ module.exports = function (app, passport) {
 		
 	app.route('/addOption')
 		.post(function(req,res){
-			var user=req.user.local.username || req.user.github.username;
-			Polls.find({"id":req.body.pollID, 'polloptions.optname': req.body.addedOpt}, function(err,docs){
-				
-				if(err){
-					throw err;
-				}
-				if(docs.length!=0){
-					Polls.findOne({id:req.body.pollID},{'_id':0},function(err,docs){
-						res.render('poll',{pollId: docs, currentUser:user,optionExists: 'This option already exists!'})
-			    	})
-				}
-				else {
-					Polls.findOneAndUpdate({"id":req.body.pollID},{$push: {'polloptions':{'optname':req.body.addedOpt,'votecount':0}}},function(err, data){
-					if(err){
-						throw err;
-					}
-					console.log(data)
-					res.redirect('/'+req.body.pollID)
-					})
-				}
+			Polls.findOneAndUpdate({"id":req.body.pollID},{$push: {'polloptions':{'optname':req.body.addedOpt,'votecount':0}}},function(err, data){
+			if(err){
+				throw err;
+			}
+			console.log(data)
+			res.redirect(req.get('referer'))
 			})
-			
 		})
 		
 	app.route('/vote')
