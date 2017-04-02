@@ -22,9 +22,10 @@ div(class="noDisplay buttDiv")
     
 form(action="/addOption" method="post" id="addOpt" class="noDisplay")
     input(type="json" name="pollID" value=pollId.id style="display:none")
-    input(type="text" name="addedOpt" id="newOptText")
+    input(type="text" name="addedOpt" id="newOptText" class="okInput")
     input(type="submit" id="submitButton" value="Add")
-    
+    p(class="warning noDisplay") Only letters and numbers are allowed!
+p(class="warning") !{optionExists}
 svg(class="chart")
 </div>
 

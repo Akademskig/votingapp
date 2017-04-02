@@ -2,6 +2,7 @@ var appUrl=window.location.origin;
 
 document.addEventListener("DOMContentLoaded", function(){
     //------------APPENDING ELEMENTS-----------
+   
     var options=pollData.polloptions
     $("title").html(pollData.pollname)
     $(".pollTitle").html(pollData.pollname)
@@ -16,11 +17,29 @@ document.addEventListener("DOMContentLoaded", function(){
     })
     
     options.forEach(function(val){
+        var opttoRemove={"pollid": pollData.id, "option": val.optname}
         var optclass=val.optname.split(" ").join("")
+        optclass=optclass.replace(/^[a-z]/i,"")
         var w1=(val.votecount ==0)? 0:(val.votecount/sumVotes*100);
         $(".pollOptions").append("<div class=\"opt-container\"><div class=\"opt "+ optclass+"\">"+val.optname+": <span>"+w1.toFixed(2)+ "%</span></div><button class=\"b noDisplay remove-"+optclass+"\">x</button></div>")
         
-        var opttoRemove={"pollid": pollData.id, "option": val.optname}
+       //------------INVALID INPUT MESSAGE--------------------
+       $('#newOptText').on('input',function(){
+            var matchNonC=$('#newOptText').val().match(/[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/i)
+            if(matchNonC!=null){
+                $('#newOptText').removeClass('okInput')
+                $('#newOptText').addClass("invalidInput");
+                $('#submitButton').prop('disabled',true);
+                $('.warning').removeClass('noDisplay')
+
+            }
+            else{
+                $('#newOptText').addClass("okInput");
+                $('#newOptText').removeClass("invalidInput");
+                $('#submitButton').prop('disabled',false);
+                $('.warning').addClass('noDisplay')
+            }
+        })
         
         $(".remove-"+optclass).on("click",function(val){
             $.post(appUrl+'/removeOption',opttoRemove,function(){
@@ -55,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function(){
     }
     
     $(".showForm").on("click",function(){
+         $('.warning').addClass('noDisplay')
         if($("#addOpt").hasClass("noDisplay")){
             $("#addOpt").removeClass('noDisplay')
         }

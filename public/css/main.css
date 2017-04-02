@@ -9,7 +9,7 @@ body{
   background: url("../imgs/background.jpg") repeat;
   font-family:"raleway", "sans-serif";
   margin:auto;
-  margin-top:0;
+  margin-top:30px;
   max-width:1000px;
   padding-top:30px;
   padding-bottom:80px;
