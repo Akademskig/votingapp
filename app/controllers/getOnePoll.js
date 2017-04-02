@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(){
     options.forEach(function(val){
         var opttoRemove={"pollid": pollData.id, "option": val.optname}
         var optclass=val.optname.split(" ").join("")
-        optclass=optclass.replace(/[^a-z0-9]/i,"")
+        optclass=optclass.replace(/[^a-z0-9]/ig,"")
         var w1=(val.votecount ==0)? 0:(val.votecount/sumVotes*100);
         $(".pollOptions").append("<div class=\"opt-container\"><div class=\"opt "+ optclass+"\">"+val.optname+": <span>"+w1.toFixed(2)+ "%</span></div><button class=\"b noDisplay remove-"+optclass+"\">x</button></div>")
         
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function(){
     
     //------------INVALID INPUT MESSAGE--------------------
        $('#newOptText').on('input',function(){
-            var matchNonC=$('#newOptText').val().match(/[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/i)
+            var matchNonC=$('#newOptText').val().match(/[!"#$%&'()*+,-./:;<=>@[\]^_`{|}~]/i)
             if(matchNonC!=null){
                 $('#newOptText').removeClass('okInput')
                 $('#newOptText').addClass("invalidInput");
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function(){
             var optExists=$('#newOptText').val();
             
             for(var i = 0; i < arrayOfOptions.length;i++){
-                if(arrayOfOptions[i]==optExists){
+                if(arrayOfOptions[i].toLowerCase()==optExists.toLowerCase()){
                     $('.warningEO').removeClass('noDisplay')
                     $('#submitButton').prop('disabled',true);
                     break;
@@ -176,45 +176,41 @@ document.addEventListener("DOMContentLoaded", function(){
         .attr("transform", "translate("+margin.left+","+margin.top+")")
         .call(yAxis)
         
-    var xAxisWidth=0   
-    
     function wrap(text, width) {
-  text.each(function() {
-    var text = d3.select(this),
-        words = text.text().split(/\s+/).reverse(),
-        word,
-        line = [],
-        lineNumber = 0,
-        lineHeight = 1.1, // ems
-        y = text.attr("y"),
-        dy = parseFloat(text.attr("dy")),
-        tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
-    while (word = words.pop()) {
-      line.push(word);
-      tspan.text(line.join(" "));
-      if (tspan.node().getComputedTextLength() > width) {
-        line.pop();
-        tspan.text(line.join(" "));
-        line = [word];
-        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-        var fontSize=$(".axis").attr('font-size')
-        xAxisWidth=lineNumber*(lineHeight+0.25)*fontSize;
+        var xAxisWidth=0 
+        text.each(function() {
+        var text = d3.select(this),
+            words = text.text().split(/\s+/).reverse(),
+            word,
+            line = [],
+            lineNumber = 0,
+            lineHeight = 1.1, // ems
+            y = text.attr("y"),
+            dy = parseFloat(text.attr("dy")),
+            tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+        while (word = words.pop()) {
+          line.push(word);
+          tspan.text(line.join(" "));
+          if (tspan.node().getComputedTextLength() > width) {
+            line.pop();
+            tspan.text(line.join(" "));
+            line = [word];
+            tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+            var fontSize=$(".axis").attr('font-size')
+            xAxisWidth=lineNumber*(lineHeight+0.25)*fontSize;
+          }
+        }
+      });
+      var totalHeight;
+      if(xAxisWidth == undefined){
+          totalHeight= svgHeight;
       }
-     
+      else{
+          totalHeight=svgHeight +xAxisWidth
+      }
+      chart.attr('width',svgWidth)
+            .attr('height',totalHeight)
     }
-  });
-  var totalHeight;
-  if(xAxisWidth == undefined){
-      totalHeight= svgHeight;
-  }
-  else{
-      totalHeight=svgHeight +xAxisWidth
-  }
-  console.log(xAxisWidth)
-  chart.attr('width',svgWidth)
-        .attr('height',totalHeight)
-}
-
 })
 
 

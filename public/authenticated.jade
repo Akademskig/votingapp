@@ -27,11 +27,14 @@
 <label for="polOptions">Poll Options:</label>
 <div class="newoptions">
 <div class="newoption">
-<input type="text"name="pollOption"/><button type="button" class="removeOption">x</button><br>
+<input type="text"class="opt1" name="pollOption"/><button type="button" class="removeOption">x</button><br>
 </div>
 </div>
+
 <button class="newOption b" type="button">New Option</button>
-<input class="submitButt b"type="submit" value="Save"/>        
+<input class="submitButt b"type="submit" value="Save"/>      
+p(class="warning noDisplay") Only letters and numbers are allowed!
+p(class="warningEO noDisplay") Some of the options are identical - fix it
 </form>
 </div> 
 
@@ -41,6 +44,7 @@ script.
 <script type="text/javascript" src="controllers/getUser.js"></script>
 <script type="text/javascript" src="controllers/getPolls.js"></script>
 <script type="text/javascript" src="controllers/newPolls.js"></script>
+<script type="text/javascript" src="controllers/functions.js"></script>
   
 </body>  
 </html>

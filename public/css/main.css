@@ -102,6 +102,13 @@ input{
   margin:10px;
 }
 
+.disabled{
+  background:gray;
+}
+.enabled{
+  background:#142E42;
+}
+
 
 /********************
 AUTH-USER HOMEPAGE
@@ -256,3 +263,21 @@ Remove buttons
   
 }
 
+.okInput{
+  border: solid 1px white;
+}
+
+.invalidInput{
+  border:solid 2px red;
+}
+
+.warning, .warningEO{
+  color:red;
+  font-size:15px;
+  font-weight:bold;
+  margin-top:5px;
+}
+.warningEO{
+  margin-top:25px;
+  z-index:10;
+}
