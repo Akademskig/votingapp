@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", function() {
   
   var existingPolls= document.querySelector(".existingPolls");
@@ -46,17 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
           else{
             $(name).html(pollName)
           }
-          
-         /* 
-          var pollColors={0: '#0B3B2E',1:'#013ADF', 2: '#0B610B', 3:'#6A0888' , 4: '#8A0808' , 5: '#0B173B' , 6: '#DF7401' };
-          
-          if(k >6){
-            k=0
-          }
-          name.style.background= pollColors[k]
-          k++
-          
-          */
+         
           //---------REMOVE BUTTONS----------------
           
           var removePollButton= document.createElement("button");

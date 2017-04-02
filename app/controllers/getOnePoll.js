@@ -66,8 +66,22 @@ document.addEventListener("DOMContentLoaded", function(){
             $("#addOpt").addClass('noDisplay')
     })
     
+    if(!$('#newOptText').val()){
+        $('#submitButton').prop('disabled',true);
+    }
+    else{
+        $('#submitButton').prop('disabled',false);
+    }
+    
     //------------INVALID INPUT MESSAGE--------------------
        $('#newOptText').on('input',function(){
+           if(!$('#newOptText').val()){
+               $('#submitButton').prop('disabled',true);
+               return
+           }
+           else{
+               $('#submitButton').prop('disabled',false);
+           }
             var matchNonC=$('#newOptText').val().match(/[!"#$%&'()*+,-./:;<=>@[\]^_`{|}~]/i)
             if(matchNonC!=null){
                 $('#newOptText').removeClass('okInput')
